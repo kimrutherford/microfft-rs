@@ -62,7 +62,8 @@ pub(crate) trait RFft {
             );
         }
 
-        x[u] *= Complex32::new(0., -1.);
+        let xu = x[u];
+        x[u] = Complex32::new(xu.re, -xu.im);
     }
 }
 

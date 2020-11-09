@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.3.1 (2020-11-09)
+
+### Fixed
+
+- Fixed a bug during the RFFT recombination calculation that caused a wrong
+  output value in bin `N / 4`.
+
+
 ## 0.3.0 (2020-03-08)
 
 ### Changed
