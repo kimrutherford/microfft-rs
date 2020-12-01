@@ -13,6 +13,7 @@
 //! # Example
 //!
 //! ```
+//! use std::convert::TryInto;
 //! use std::f32::consts::PI;
 //!
 //! // generate 16 samples of a sine wave at frequency 3
@@ -24,6 +25,7 @@
 //!     .collect();
 //!
 //! // compute the RFFT of the samples
+//! let mut samples: [_; 16] = samples.try_into().unwrap();
 //! let spectrum = microfft::real::rfft_16(&mut samples);
 //!
 //! // the spectrum has a spike at index `signal_freq`

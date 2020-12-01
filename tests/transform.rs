@@ -1,3 +1,5 @@
+use std::convert::TryInto;
+
 use num_complex::Complex32;
 use rustfft::{algorithm::Radix4, FFT};
 
@@ -32,12 +34,13 @@ macro_rules! cfft_tests {
         $(
             #[test]
             fn $name() {
-                let mut input: Vec<_> = (0..$N)
+                let input: Vec<_> = (0..$N)
                     .map(|i| i as f32)
                     .map(|f| Complex32::new(f, f))
                     .collect();
 
                 let expected = rust_fft(&input);
+                let mut input: [_; $N] = input.try_into().unwrap();
                 let result = microfft::complex::$name(&mut input);
 
                 assert_approx_eq(result, &expected);
@@ -66,10 +69,12 @@ macro_rules! rfft_tests {
         $(
             #[test]
             fn $name() {
-                let mut input: Vec<_> = (5..($N+5)).map(|i| i as f32).collect();
-                let mut input_c: Vec<_> = input.iter().map(|f| Complex32::new(*f, 0.)).collect();
+                let input: Vec<_> = (5..($N+5)).map(|i| i as f32).collect();
+                let input_c: Vec<_> = input.iter().map(|f| Complex32::new(*f, 0.)).collect();
 
+                let mut input_c: [_; $N] = input_c.try_into().unwrap();
                 let expected = microfft::complex::$cfft_name(&mut input_c);
+                let mut input: [_; $N] = input.try_into().unwrap();
                 let result = microfft::real::$name(&mut input);
 
                 assert_approx_eq(result, &expected[..($N / 2)]);
