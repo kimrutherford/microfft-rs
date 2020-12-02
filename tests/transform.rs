@@ -24,7 +24,7 @@ fn approx_eq(a: Complex32, b: Complex32) -> bool {
 
 fn assert_approx_eq(xa: &[Complex32], xb: &[Complex32]) {
     assert_eq!(xa.len(), xb.len());
-    for (a, b) in xa.into_iter().zip(xb) {
+    for (a, b) in xa.iter().zip(xb) {
         assert!(approx_eq(*a, *b));
     }
 }
