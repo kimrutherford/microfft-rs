@@ -40,6 +40,9 @@ let mut samples: Vec<_> = (0..sample_count)
 
 // compute the RFFT of the samples
 let spectrum = microfft::real::rfft_16(&mut samples);
+// since the real-valued coefficient at the Nyquist frequency is packed into the
+// imaginary part of the DC bin, it must be cleared before computing the amplitudes
+spectrum[0].im = 0.0;
 
 // the spectrum has a spike at index `signal_freq`
 let amplitudes: Vec<_> = spectrum.iter().map(|c| c.norm() as u32).collect();

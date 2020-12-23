@@ -7,7 +7,9 @@
 //!
 //! The produced output is the first half out the output returned by
 //! the corresponding `N`-point CFFT, i.e. the real DC value and
-//! `N/2 - 1` positive-frequency terms. The negative-frequency terms
+//! `N/2 - 1` positive-frequency terms. Additionally, the real-valued
+//! coefficient at the Nyquist frequency is packed into the imaginary part
+//! of the DC bin. The negative-frequency terms
 //! are not computed, since they can be calculated from the
 //! positive-frequency terms and are therefore redundant.
 
