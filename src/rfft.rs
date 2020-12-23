@@ -38,9 +38,11 @@ pub(crate) trait RFft {
         let table_len = tables::SINE.len();
         let table_stride = (table_len + 1) * 4 / Self::N;
 
-        // DC
+        // The real part of the first element is the DC value.
+        // Additionally, the real-valued coefficient at the Nyquist frequency
+        // is stored in the imaginary part.
         let x0 = x[0];
-        x[0] = Complex32::new(x0.re + x0.im, 0.);
+        x[0] = Complex32::new(x0.re + x0.im, x0.re - x0.im);
 
         let u = m / 2;
         for k in 1..u {
@@ -76,9 +78,11 @@ impl RFft for RFftN2 {
     fn recombine(x: &mut [Complex32]) {
         debug_assert_eq!(x.len(), 1);
 
-        // DC
+        // The real part of the first element is the DC value.
+        // Additionally, the real-valued coefficient at the Nyquist frequency
+        // is stored in the imaginary part.
         let x0 = x[0];
-        x[0] = Complex32::new(x0.re + x0.im, 0.);
+        x[0] = Complex32::new(x0.re + x0.im, x0.re - x0.im);
     }
 }
 

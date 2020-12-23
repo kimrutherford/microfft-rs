@@ -71,7 +71,12 @@ macro_rules! rfft_tests {
 
                 let expected = microfft::complex::$cfft_name(&mut input_c);
                 let result = microfft::real::$name(&mut input);
-
+                // The real-valued coefficient at the Nyquist frequency
+                // is packed into the imaginary part of the DC bin.
+                let coeff_at_nyquist = result[0].im;
+                assert_eq!(coeff_at_nyquist, expected[$N / 2].re);
+                // Clear this value before checking the results.
+                result[0].im = 0.0;
                 assert_approx_eq(result, &expected[..($N / 2)]);
             }
         )*
