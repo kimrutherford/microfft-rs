@@ -1,15 +1,20 @@
 use std::convert::TryInto;
 
-use num_complex::Complex32;
-use rustfft::{algorithm::Radix4, FFT};
+use microfft::Complex32;
+use rustfft::{algorithm::Radix4, Fft, FftDirection};
 
 fn rust_fft(input: &[Complex32]) -> Vec<Complex32> {
-    let len = input.len();
-    let fft = Radix4::new(len, false);
-    let mut input = input.to_vec();
-    let mut output = vec![Complex32::default(); len];
-    fft.process(&mut input, &mut output);
-    output
+    // Convert to rustfft's `num_complex` types, to prevent issues with
+    // incompatible versions.
+    let mut buf: Vec<_> = input
+        .iter()
+        .map(|c| rustfft::num_complex::Complex32::new(c.re, c.im))
+        .collect();
+
+    let fft = Radix4::new(buf.len(), FftDirection::Forward);
+    fft.process(&mut buf);
+
+    buf.iter().map(|c| Complex32::new(c.re, c.im)).collect()
 }
 
 fn approx_eq(a: Complex32, b: Complex32) -> bool {
