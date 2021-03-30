@@ -1,7 +1,6 @@
 //! FFT on complex inputs (CFFT)
 
-use crate::cfft::*;
-use num_complex::Complex32;
+use crate::{cfft::*, Complex32};
 
 /// Perform an in-place 2-point CFFT.
 ///

@@ -1,5 +1,4 @@
-use crate::tables;
-use num_complex::Complex32;
+use crate::{tables, Complex32};
 
 pub(crate) trait CFft {
     type Half: CFft;

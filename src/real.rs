@@ -15,8 +15,7 @@
 
 use core::convert::TryInto;
 
-use crate::rfft::*;
-use num_complex::Complex32;
+use crate::{rfft::*, Complex32};
 
 /// Perform an in-place 2-point RFFT.
 ///
