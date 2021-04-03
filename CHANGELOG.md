@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.4.0 (2021-04-03)
+
+### Changed
+
+- **Breaking:** The MSRV has been increased to 1.51.0.
+- **Breaking:** All API functions for computing FFTs now take references to
+  arrays instead of references to slices. This has the benefit of moving the
+  length checking to compile time, which makes those functions panic-proof.
+- **Breaking:** When computing RFFTs, the real-valued coefficient at the
+  Nyquist frequency is now packed into the imaginary part of the DC bin
+  (bin 0). Previously this value was simply dropped from the RFFT output.
+- Added `#[must_use]` annotations to all FFT API functions.
+
+### Fixed
+
+- Thanks to Cargo's new resolver it is now possible to build microfft as a
+  stand-alone library.
+
+
 ## 0.3.1 (2020-11-09)
 
 ### Fixed
