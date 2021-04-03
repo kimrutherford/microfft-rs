@@ -13,6 +13,7 @@ use crate::{cfft::*, Complex32};
 /// let result = cfft_2(&mut input);
 /// ```
 #[inline]
+#[must_use]
 pub fn cfft_2(input: &mut [Complex32; 2]) -> &mut [Complex32; 2] {
     CFftN2::transform(input);
     input
@@ -29,6 +30,7 @@ pub fn cfft_2(input: &mut [Complex32; 2]) -> &mut [Complex32; 2] {
 /// let result = cfft_4(&mut input);
 /// ```
 #[inline]
+#[must_use]
 pub fn cfft_4(input: &mut [Complex32; 4]) -> &mut [Complex32; 4] {
     CFftN4::transform(input);
     input
@@ -57,6 +59,7 @@ pub fn cfft_4(input: &mut [Complex32; 4]) -> &mut [Complex32; 4] {
     feature = "maxn-4096",
 ))]
 #[inline]
+#[must_use]
 pub fn cfft_8(input: &mut [Complex32; 8]) -> &mut [Complex32; 8] {
     CFftN8::transform(input);
     input
@@ -84,6 +87,7 @@ pub fn cfft_8(input: &mut [Complex32; 8]) -> &mut [Complex32; 8] {
     feature = "maxn-4096",
 ))]
 #[inline]
+#[must_use]
 pub fn cfft_16(input: &mut [Complex32; 16]) -> &mut [Complex32; 16] {
     CFftN16::transform(input);
     input
@@ -110,6 +114,7 @@ pub fn cfft_16(input: &mut [Complex32; 16]) -> &mut [Complex32; 16] {
     feature = "maxn-4096",
 ))]
 #[inline]
+#[must_use]
 pub fn cfft_32(input: &mut [Complex32; 32]) -> &mut [Complex32; 32] {
     CFftN32::transform(input);
     input
@@ -135,6 +140,7 @@ pub fn cfft_32(input: &mut [Complex32; 32]) -> &mut [Complex32; 32] {
     feature = "maxn-4096",
 ))]
 #[inline]
+#[must_use]
 pub fn cfft_64(input: &mut [Complex32; 64]) -> &mut [Complex32; 64] {
     CFftN64::transform(input);
     input
@@ -159,6 +165,7 @@ pub fn cfft_64(input: &mut [Complex32; 64]) -> &mut [Complex32; 64] {
     feature = "maxn-4096",
 ))]
 #[inline]
+#[must_use]
 pub fn cfft_128(input: &mut [Complex32; 128]) -> &mut [Complex32; 128] {
     CFftN128::transform(input);
     input
@@ -182,6 +189,7 @@ pub fn cfft_128(input: &mut [Complex32; 128]) -> &mut [Complex32; 128] {
     feature = "maxn-4096",
 ))]
 #[inline]
+#[must_use]
 pub fn cfft_256(input: &mut [Complex32; 256]) -> &mut [Complex32; 256] {
     CFftN256::transform(input);
     input
@@ -204,6 +212,7 @@ pub fn cfft_256(input: &mut [Complex32; 256]) -> &mut [Complex32; 256] {
     feature = "maxn-4096",
 ))]
 #[inline]
+#[must_use]
 pub fn cfft_512(input: &mut [Complex32; 512]) -> &mut [Complex32; 512] {
     CFftN512::transform(input);
     input
@@ -221,6 +230,7 @@ pub fn cfft_512(input: &mut [Complex32; 512]) -> &mut [Complex32; 512] {
 /// ```
 #[cfg(any(feature = "maxn-1024", feature = "maxn-2048", feature = "maxn-4096"))]
 #[inline]
+#[must_use]
 pub fn cfft_1024(input: &mut [Complex32; 1024]) -> &mut [Complex32; 1024] {
     CFftN1024::transform(input);
     input
@@ -238,6 +248,7 @@ pub fn cfft_1024(input: &mut [Complex32; 1024]) -> &mut [Complex32; 1024] {
 /// ```
 #[cfg(any(feature = "maxn-2048", feature = "maxn-4096"))]
 #[inline]
+#[must_use]
 pub fn cfft_2048(input: &mut [Complex32; 2048]) -> &mut [Complex32; 2048] {
     CFftN2048::transform(input);
     input
@@ -255,6 +266,7 @@ pub fn cfft_2048(input: &mut [Complex32; 2048]) -> &mut [Complex32; 2048] {
 /// ```
 #[cfg(any(feature = "maxn-4096"))]
 #[inline]
+#[must_use]
 pub fn cfft_4096(input: &mut [Complex32; 4096]) -> &mut [Complex32; 4096] {
     CFftN4096::transform(input);
     input

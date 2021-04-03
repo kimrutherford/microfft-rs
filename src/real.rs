@@ -28,6 +28,7 @@ use crate::{rfft::*, Complex32};
 /// let result = rfft_2(&mut input);
 /// ```
 #[inline]
+#[must_use]
 pub fn rfft_2(input: &mut [f32; 2]) -> &mut [Complex32; 1] {
     RFftN2::transform(input).try_into().unwrap()
 }
@@ -43,6 +44,7 @@ pub fn rfft_2(input: &mut [f32; 2]) -> &mut [Complex32; 1] {
 /// let result = rfft_4(&mut input);
 /// ```
 #[inline]
+#[must_use]
 pub fn rfft_4(input: &mut [f32; 4]) -> &mut [Complex32; 2] {
     RFftN4::transform(input).try_into().unwrap()
 }
@@ -70,6 +72,7 @@ pub fn rfft_4(input: &mut [f32; 4]) -> &mut [Complex32; 2] {
     feature = "maxn-4096",
 ))]
 #[inline]
+#[must_use]
 pub fn rfft_8(input: &mut [f32; 8]) -> &mut [Complex32; 4] {
     RFftN8::transform(input).try_into().unwrap()
 }
@@ -96,6 +99,7 @@ pub fn rfft_8(input: &mut [f32; 8]) -> &mut [Complex32; 4] {
     feature = "maxn-4096",
 ))]
 #[inline]
+#[must_use]
 pub fn rfft_16(input: &mut [f32; 16]) -> &mut [Complex32; 8] {
     RFftN16::transform(input).try_into().unwrap()
 }
@@ -121,6 +125,7 @@ pub fn rfft_16(input: &mut [f32; 16]) -> &mut [Complex32; 8] {
     feature = "maxn-4096",
 ))]
 #[inline]
+#[must_use]
 pub fn rfft_32(input: &mut [f32; 32]) -> &mut [Complex32; 16] {
     RFftN32::transform(input).try_into().unwrap()
 }
@@ -145,6 +150,7 @@ pub fn rfft_32(input: &mut [f32; 32]) -> &mut [Complex32; 16] {
     feature = "maxn-4096",
 ))]
 #[inline]
+#[must_use]
 pub fn rfft_64(input: &mut [f32; 64]) -> &mut [Complex32; 32] {
     RFftN64::transform(input).try_into().unwrap()
 }
@@ -168,6 +174,7 @@ pub fn rfft_64(input: &mut [f32; 64]) -> &mut [Complex32; 32] {
     feature = "maxn-4096",
 ))]
 #[inline]
+#[must_use]
 pub fn rfft_128(input: &mut [f32; 128]) -> &mut [Complex32; 64] {
     RFftN128::transform(input).try_into().unwrap()
 }
@@ -190,6 +197,7 @@ pub fn rfft_128(input: &mut [f32; 128]) -> &mut [Complex32; 64] {
     feature = "maxn-4096",
 ))]
 #[inline]
+#[must_use]
 pub fn rfft_256(input: &mut [f32; 256]) -> &mut [Complex32; 128] {
     RFftN256::transform(input).try_into().unwrap()
 }
@@ -211,6 +219,7 @@ pub fn rfft_256(input: &mut [f32; 256]) -> &mut [Complex32; 128] {
     feature = "maxn-4096",
 ))]
 #[inline]
+#[must_use]
 pub fn rfft_512(input: &mut [f32; 512]) -> &mut [Complex32; 256] {
     RFftN512::transform(input).try_into().unwrap()
 }
@@ -227,6 +236,7 @@ pub fn rfft_512(input: &mut [f32; 512]) -> &mut [Complex32; 256] {
 /// ```
 #[cfg(any(feature = "maxn-1024", feature = "maxn-2048", feature = "maxn-4096"))]
 #[inline]
+#[must_use]
 pub fn rfft_1024(input: &mut [f32; 1024]) -> &mut [Complex32; 512] {
     RFftN1024::transform(input).try_into().unwrap()
 }
@@ -243,6 +253,7 @@ pub fn rfft_1024(input: &mut [f32; 1024]) -> &mut [Complex32; 512] {
 /// ```
 #[cfg(any(feature = "maxn-2048", feature = "maxn-4096"))]
 #[inline]
+#[must_use]
 pub fn rfft_2048(input: &mut [f32; 2048]) -> &mut [Complex32; 1024] {
     RFftN2048::transform(input).try_into().unwrap()
 }
@@ -259,6 +270,7 @@ pub fn rfft_2048(input: &mut [f32; 2048]) -> &mut [Complex32; 1024] {
 /// ```
 #[cfg(any(feature = "maxn-4096"))]
 #[inline]
+#[must_use]
 pub fn rfft_4096(input: &mut [f32; 4096]) -> &mut [Complex32; 2048] {
     RFftN4096::transform(input).try_into().unwrap()
 }
