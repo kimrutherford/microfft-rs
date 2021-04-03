@@ -8,7 +8,7 @@
 //! In addition to the standard FFT implementation on [`Complex32`] values
 //! ([`complex`]), an implementation working on real (`f32`) input values is
 //! provided ([`real`]). An `N`-point RFFT internally computes an `N/2`-point
-//! CFFT, making it roughly twice as fast a the complex variant.
+//! CFFT, making it roughly twice as fast as the complex variant.
 //!
 //! # Example
 //!

@@ -28,6 +28,7 @@ The following example demonstrates computing a 16-point RFFT on a set of
 samples generated from a sine signal:
 
 ```rust
+use std::convert::TryInto;
 use std::f32::consts::PI;
 
 // generate 16 samples of a sine wave at frequency 3
@@ -39,14 +40,15 @@ let mut samples: Vec<_> = (0..sample_count)
     .collect();
 
 // compute the RFFT of the samples
+let mut samples: [_; 16] = samples.try_into().unwrap();
 let spectrum = microfft::real::rfft_16(&mut samples);
 // since the real-valued coefficient at the Nyquist frequency is packed into the
 // imaginary part of the DC bin, it must be cleared before computing the amplitudes
 spectrum[0].im = 0.0;
 
 // the spectrum has a spike at index `signal_freq`
-let amplitudes: Vec<_> = spectrum.iter().map(|c| c.norm() as u32).collect();
-assert_eq!(&amplitudes, &[0, 0, 0, 8, 0, 0, 0, 0]);
+let amplitudes: Vec<_> = spectrum.iter().map(|c| c.norm_sqr() as u32).collect();
+assert_eq!(&amplitudes, &[0, 0, 0, 64, 0, 0, 0, 0]);
 ```
 
 ## Requirements
