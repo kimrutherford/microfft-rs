@@ -5,30 +5,17 @@ authors = ["Jan Teske <jteske@posteo.net>"]
 edition = "2018"
 
 [dependencies]
-cortex-m = "0.6"
+cortex-m = "0.7"
 cortex-m-rt = "0.6"
-heapless = "0.5"
 panic-semihosting = "0.5"
 
 [dependencies.hal]
-version = "0.4"
+version = "0.6"
 package = "stm32f3xx-hal"
-features = ["stm32f303"]
-
-[dependencies.num-complex]
-version = "0.2"
-default-features = false
+features = ["stm32f303xc"]
 
 [dependencies.microfft]
 path = ".."
-default-features = false
-
-[dependencies.fourier]
-git = "https://github.com/calebzulawski/fourier.git"
-default-features = false
-
-[dependencies.fourier-algorithms]
-git = "https://github.com/calebzulawski/fourier.git"
 default-features = false
 
 [profile.release]
@@ -38,7 +25,6 @@ lto = true
 [features]
 microfft-c = []
 microfft-r = []
-fourier-c = []
 n-4 = ["microfft/maxn-4"]
 n-8 = ["microfft/maxn-8"]
 n-16 = ["microfft/maxn-16"]

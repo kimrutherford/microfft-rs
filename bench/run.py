@@ -51,8 +51,6 @@ def run_benches():
         run_bench("microfft-c", 2 ** i)
     for i in range(2, 13):
         run_bench("microfft-r", 2 ** i)
-    for i in range(2, 10):
-        run_bench("fourier-c", 2 ** i)
 
 
 def main():
@@ -65,8 +63,6 @@ def main():
         run_benches()
     finally:
         openocd.terminate()
-
-    openocd.terminate()
 
 
 if __name__ == "__main__":
