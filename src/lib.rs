@@ -57,17 +57,17 @@ use static_assertions::assert_cfg;
 
 assert_cfg!(
     any(
-        feature = "maxn-4",
-        feature = "maxn-8",
-        feature = "maxn-16",
-        feature = "maxn-32",
-        feature = "maxn-64",
-        feature = "maxn-128",
-        feature = "maxn-256",
-        feature = "maxn-512",
-        feature = "maxn-1024",
-        feature = "maxn-2048",
-        feature = "maxn-4096",
+        feature = "size-4",
+        feature = "size-8",
+        feature = "size-16",
+        feature = "size-32",
+        feature = "size-64",
+        feature = "size-128",
+        feature = "size-256",
+        feature = "size-512",
+        feature = "size-1024",
+        feature = "size-2048",
+        feature = "size-4096",
     ),
-    "One of the `maxn-*` features of this crate must be set."
+    "At least one of the `size-*` features of this crate must be set."
 );

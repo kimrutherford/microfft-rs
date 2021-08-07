@@ -68,10 +68,10 @@ in your `Cargo.toml` like this:
 ```toml
 [dependencies.microfft]
 default-features = false
-features = ["maxn-4096"]
+features = ["size-4096"]
 ```
 
-The meaning of the `maxn-4096` feature is explained in the next section.
+The meaning of the `size-4096` feature is explained in the next section.
 
 ## Sine Tables
 
@@ -81,13 +81,13 @@ table for each FFT size, as there would be duplication between those tables.
 
 The default sine table supports a full 4096-point FFT. If you only want to
 compute FFTs of smaller sizes, it is recommended to select the appropriate
-`maxn-*` feature, to not waste memory. For example, if your maximum FFT size is
+`size-*` feature, to not waste memory. For example, if your maximum FFT size is
 1024, add this to your `Cargo.toml`:
 
 ```toml
 [dependencies.microfft]
 default-features = false
-features = ["maxn-1024"]
+features = ["size-1024"]
 ```
 
 This tells microfft to not provide functions for computing FFTs of sizes larger
@@ -119,22 +119,22 @@ considerable requirements on read-only memory. If your chip doesn't have much
 flash to begin with, this can be an issue.
 
 The amount of memory required for tables depends on the the configuration of
-the [`maxn-*`](#sine-tables) and [`bitrev-tables`](#bit-reversal-tables)
+the [`size-*`](#sine-tables) and [`bitrev-tables`](#bit-reversal-tables)
 features:
 
-| `maxn-*`    | without `bitrev-tables` | with `bitrev-tables` |
-| ----------- | ----------------------: | -------------------: |
-| `maxn-4`    |                       0 |                    8 |
-| `maxn-8`    |                       4 |                   20 |
-| `maxn-16`   |                      12 |                   44 |
-| `maxn-32`   |                      28 |                   92 |
-| `maxn-64`   |                      60 |                  188 |
-| `maxn-128`  |                     124 |                  380 |
-| `maxn-256`  |                     252 |                  764 |
-| `maxn-512`  |                     508 |                1,532 |
-| `maxn-1024` |                   1,020 |                3,068 |
-| `maxn-2048` |                   2,044 |                6,140 |
-| `maxn-4096` |                   4,092 |               12,284 |
+| `size-*`     | without `bitrev-tables` | with `bitrev-tables` |
+| ------------ | ----------------------: | -------------------: |
+| `size-4`     |                       0 |                    8 |
+| `size-8`     |                       4 |                   20 |
+| `size-16`    |                      12 |                   44 |
+| `size-32`    |                      28 |                   92 |
+| `size-64`    |                      60 |                  188 |
+| `size-128`   |                     124 |                  380 |
+| `size-256`   |                     252 |                  764 |
+| `size-512`   |                     508 |                1,532 |
+| `size-1024`  |                   1,020 |                3,068 |
+| `size-2048`  |                   2,044 |                6,140 |
+| `size-4096`  |                   4,092 |               12,284 |
 
 In addition, the code size also increases with FFT size.
 

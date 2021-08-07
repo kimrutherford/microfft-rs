@@ -22,6 +22,7 @@ edition = "2018"
 resolver = "2"
 
 [dependencies]
+cfg-if = "1"
 static_assertions = "1"
 
 [dependencies.num-complex]
@@ -32,20 +33,20 @@ default-features = false
 rustfft = "5"
 
 [features]
-default = ["std", "maxn-4096"]
+default = ["std", "size-4096"]
 std = ["num-complex/std"]
 bitrev-tables = []
-maxn-4 = []
-maxn-8 = []
-maxn-16 = []
-maxn-32 = []
-maxn-64 = []
-maxn-128 = []
-maxn-256 = []
-maxn-512 = []
-maxn-1024 = []
-maxn-2048 = []
-maxn-4096 = []
+size-4 = []
+size-8 = ["size-4"]
+size-16 = ["size-8"]
+size-32 = ["size-16"]
+size-64 = ["size-32"]
+size-128 = ["size-64"]
+size-256 = ["size-128"]
+size-512 = ["size-256"]
+size-1024 = ["size-512"]
+size-2048 = ["size-1024"]
+size-4096 = ["size-2048"]
 
 [badges]
 gitlab = { repository = "ra_kete/microfft-rs" }
