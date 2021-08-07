@@ -216,3 +216,39 @@ pub fn cfft_4096(input: &mut [Complex32; 4096]) -> &mut [Complex32; 4096] {
     CFftN4096::transform(input);
     input
 }
+
+/// Perform an in-place 8192-point CFFT.
+///
+/// # Example
+///
+/// ```
+/// use microfft::{Complex32, complex::cfft_8192};
+///
+/// let mut input = [Complex32::default(); 8192];
+/// let result = cfft_8192(&mut input);
+/// ```
+#[cfg(feature = "size-8192")]
+#[inline]
+#[must_use]
+pub fn cfft_8192(input: &mut [Complex32; 8192]) -> &mut [Complex32; 8192] {
+    CFftN8192::transform(input);
+    input
+}
+
+/// Perform an in-place 16384-point CFFT.
+///
+/// # Example
+///
+/// ```
+/// use microfft::{Complex32, complex::cfft_16384};
+///
+/// let mut input = [Complex32::default(); 16384];
+/// let result = cfft_16384(&mut input);
+/// ```
+#[cfg(feature = "size-16384")]
+#[inline]
+#[must_use]
+pub fn cfft_16384(input: &mut [Complex32; 16384]) -> &mut [Complex32; 16384] {
+    CFftN16384::transform(input);
+    input
+}

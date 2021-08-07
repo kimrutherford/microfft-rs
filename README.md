@@ -61,7 +61,7 @@ microfft keeps a single sine table to calculate the twiddle factors for all
 FFT sizes. This removes some memory overhead compared to keeping a separate
 table for each FFT size, as there would be duplication between those tables.
 
-The default sine table supports a full 4096-point FFT. If you only want to
+The default sine table supports FFTs up to size 4096. If you only want to
 compute FFTs of smaller sizes, it is recommended to select the appropriate
 `size-*` feature, to not waste memory. For example, if your maximum FFT size is
 1024, add this to your `Cargo.toml`:
@@ -74,6 +74,16 @@ features = ["size-1024"]
 
 This tells microfft to not provide functions for computing FFTs of sizes larger
 than 1024 and to keep only the 1024-point sine table.
+
+If you want to compute FFTs with more than 4096 points, you also need to enable
+the respective feature. In this case, disabling the default features is not
+required as microfft always determines the sine table size based on the largest
+size requested. So this works as expected:
+
+```toml
+[dependencies.microfft]
+features = ["size-8192"]
+```
 
 ## Bit-reversal Tables
 
@@ -134,6 +144,8 @@ features:
 | `size-1024`  |                   1,020 |                3,068 |
 | `size-2048`  |                   2,044 |                6,140 |
 | `size-4096`  |                   4,092 |               12,284 |
+| `size-8192`  |                   8,188 |               24,572 |
+| `size-16384` |                  16,380 |               49,148 |
 
 In addition, the code size also increases with FFT size.
 
@@ -141,7 +153,7 @@ In addition, the code size also increases with FFT size.
 
 microfft only supports FFT point-sizes that are powers of two, a limitation of
 the Radix-2 algorithm. Additionally, the maximum supported size is currently
-4096, although this limit can be increased in the future as necessary.
+16384, although this limit can be increased in the future as necessary.
 
 ### `f64` Support
 

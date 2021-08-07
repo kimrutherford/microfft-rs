@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - A `std` feature that is disabled by default. It transitively enables the
   `std` feature on the `num-complex` dependency, enabling more methods on the
   `Complex32` values returned by the FFT functions.
+- Support for FFT sizes 8192 and 16384.
 
 
 ## 0.4.0 (2021-04-03)

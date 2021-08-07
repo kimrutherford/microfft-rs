@@ -110,4 +110,6 @@ rfft_impls! {
     (RFftN1024, CFftN512),
     (RFftN2048, CFftN1024),
     (RFftN4096, CFftN2048),
+    (RFftN8192, CFftN4096),
+    (RFftN16384, CFftN8192),
 }

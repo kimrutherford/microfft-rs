@@ -21,7 +21,7 @@ fn approx_eq(a: Complex32, b: Complex32) -> bool {
     fn approx_f32(x: f32, y: f32) -> bool {
         let diff = (x - y).abs();
         let rel_diff = if x != 0. { (diff / x).abs() } else { diff };
-        rel_diff < 0.02
+        rel_diff < 0.05
     }
 
     approx_f32(a.re, b.re) && approx_f32(a.im, b.im)
@@ -67,6 +67,8 @@ cfft_tests! {
     cfft_1024: 1024,
     cfft_2048: 2048,
     cfft_4096: 4096,
+    cfft_8192: 8192,
+    cfft_16384: 16384,
 }
 
 macro_rules! rfft_tests {
@@ -106,4 +108,6 @@ rfft_tests! {
     rfft_1024: (1024, cfft_1024),
     rfft_2048: (2048, cfft_2048),
     rfft_4096: (4096, cfft_4096),
+    rfft_8192: (8192, cfft_8192),
+    rfft_16384: (16384, cfft_16384),
 }

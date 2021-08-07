@@ -68,6 +68,8 @@ assert_cfg!(
         feature = "size-1024",
         feature = "size-2048",
         feature = "size-4096",
+        feature = "size-8192",
+        feature = "size-16384",
     ),
     "At least one of the `size-*` features of this crate must be set."
 );
