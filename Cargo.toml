@@ -30,7 +30,7 @@ version = "0.4"
 default-features = false
 
 [dev-dependencies]
-rustfft = "5"
+rustfft = "6"
 
 # workaround for enabling all features for `cargo test`
 # see https://github.com/rust-lang/cargo/issues/2911
