@@ -55,24 +55,6 @@ assert_eq!(&amplitudes, &[0, 0, 0, 8, 0, 0, 0, 0]);
 
 Requires Rust version **1.51.0** or newer.
 
-## `no_std` Usage
-
-microfft has a `std` feature meant to make the library more useful for
-applications that can make use of the Rust standard library. For embedded
-applications this is usually not the case, so the `std` feature needs to be
-disabled.
-
-If you want to use microfft in a `no_std` application, specify the dependency
-in your `Cargo.toml` like this:
-
-```toml
-[dependencies.microfft]
-default-features = false
-features = ["size-4096"]
-```
-
-The meaning of the `size-4096` feature is explained in the next section.
-
 ## Sine Tables
 
 microfft keeps a single sine table to calculate the twiddle factors for all
@@ -105,6 +87,23 @@ microfft. While it can speed up FFT computation on some systems, there are also
 architectures that provide dedicated bit-reversal instructions (like `RBIT` on
 ARMv7). On such architectures, switching on bitrev tables is usually
 detrimental to performance.
+
+## `std` Usage
+
+microfft provides a `std` feature meant to make the library more useful for
+applications that can make use of the Rust standard library. Currently the only
+thing it does is transitively enabling the `std` feature of the `num-complex`
+crate, thereby making more methods available on the `Complex32` values returned
+by the FFT functions.
+
+As embedded applications usually run on targets that don't have a Rust standard
+library, the `std` feature is disabled by default. You can enable it in your
+`Cargo.toml`:
+
+```toml
+[dependencies.microfft]
+features = ["std"]
+```
 
 ## Limitations
 

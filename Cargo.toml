@@ -32,8 +32,14 @@ default-features = false
 [dev-dependencies]
 rustfft = "5"
 
+# workaround for enabling all features for `cargo test`
+# see https://github.com/rust-lang/cargo/issues/2911
+[dev-dependencies.microfft]
+path = "."
+features = ["std"]
+
 [features]
-default = ["std", "size-4096"]
+default = ["size-4096"]
 std = ["num-complex/std"]
 bitrev-tables = []
 size-4 = []

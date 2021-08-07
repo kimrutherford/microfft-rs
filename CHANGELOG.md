@@ -6,15 +6,17 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- **Breaking:** Introduced a `std` feature that is enabled by default. It
-  transitively enables the `std` feature on the `num-complex` dependency,
-  enabling more methods on the `Complex32` values returned by the FFT
-  functions. `no_std` users will need to disable this feature.
 - **Breaking:** The former `maxn-*` features of this crate have been renamed
   to `size-*`. They still work basically the same way but are now additive,
   which means it is allowed that more than one of them is enabled at the same
   time. This makes microfft work as expected in the face of Cargo's feature
   unification.
+
+### Added
+
+- A `std` feature that is disabled by default. It transitively enables the
+  `std` feature on the `num-complex` dependency, enabling more methods on the
+  `Complex32` values returned by the FFT functions.
 
 
 ## 0.4.0 (2021-04-03)
