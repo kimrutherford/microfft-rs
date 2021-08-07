@@ -59,18 +59,7 @@ pub fn rfft_4(input: &mut [f32; 4]) -> &mut [Complex32; 2] {
 /// let mut input = [0.; 8];
 /// let result = rfft_8(&mut input);
 /// ```
-#[cfg(any(
-    feature = "maxn-8",
-    feature = "maxn-16",
-    feature = "maxn-32",
-    feature = "maxn-64",
-    feature = "maxn-128",
-    feature = "maxn-256",
-    feature = "maxn-512",
-    feature = "maxn-1024",
-    feature = "maxn-2048",
-    feature = "maxn-4096",
-))]
+#[cfg(feature = "size-4")]
 #[inline]
 #[must_use]
 pub fn rfft_8(input: &mut [f32; 8]) -> &mut [Complex32; 4] {
@@ -87,17 +76,7 @@ pub fn rfft_8(input: &mut [f32; 8]) -> &mut [Complex32; 4] {
 /// let mut input = [0.; 16];
 /// let result = rfft_16(&mut input);
 /// ```
-#[cfg(any(
-    feature = "maxn-16",
-    feature = "maxn-32",
-    feature = "maxn-64",
-    feature = "maxn-128",
-    feature = "maxn-256",
-    feature = "maxn-512",
-    feature = "maxn-1024",
-    feature = "maxn-2048",
-    feature = "maxn-4096",
-))]
+#[cfg(feature = "size-8")]
 #[inline]
 #[must_use]
 pub fn rfft_16(input: &mut [f32; 16]) -> &mut [Complex32; 8] {
@@ -114,16 +93,7 @@ pub fn rfft_16(input: &mut [f32; 16]) -> &mut [Complex32; 8] {
 /// let mut input = [0.; 32];
 /// let result = rfft_32(&mut input);
 /// ```
-#[cfg(any(
-    feature = "maxn-32",
-    feature = "maxn-64",
-    feature = "maxn-128",
-    feature = "maxn-256",
-    feature = "maxn-512",
-    feature = "maxn-1024",
-    feature = "maxn-2048",
-    feature = "maxn-4096",
-))]
+#[cfg(feature = "size-16")]
 #[inline]
 #[must_use]
 pub fn rfft_32(input: &mut [f32; 32]) -> &mut [Complex32; 16] {
@@ -140,15 +110,7 @@ pub fn rfft_32(input: &mut [f32; 32]) -> &mut [Complex32; 16] {
 /// let mut input = [0.; 64];
 /// let result = rfft_64(&mut input);
 /// ```
-#[cfg(any(
-    feature = "maxn-64",
-    feature = "maxn-128",
-    feature = "maxn-256",
-    feature = "maxn-512",
-    feature = "maxn-1024",
-    feature = "maxn-2048",
-    feature = "maxn-4096",
-))]
+#[cfg(feature = "size-32")]
 #[inline]
 #[must_use]
 pub fn rfft_64(input: &mut [f32; 64]) -> &mut [Complex32; 32] {
@@ -165,14 +127,7 @@ pub fn rfft_64(input: &mut [f32; 64]) -> &mut [Complex32; 32] {
 /// let mut input = [0.; 128];
 /// let result = rfft_128(&mut input);
 /// ```
-#[cfg(any(
-    feature = "maxn-128",
-    feature = "maxn-256",
-    feature = "maxn-512",
-    feature = "maxn-1024",
-    feature = "maxn-2048",
-    feature = "maxn-4096",
-))]
+#[cfg(feature = "size-64")]
 #[inline]
 #[must_use]
 pub fn rfft_128(input: &mut [f32; 128]) -> &mut [Complex32; 64] {
@@ -189,13 +144,7 @@ pub fn rfft_128(input: &mut [f32; 128]) -> &mut [Complex32; 64] {
 /// let mut input = [0.; 256];
 /// let result = rfft_256(&mut input);
 /// ```
-#[cfg(any(
-    feature = "maxn-256",
-    feature = "maxn-512",
-    feature = "maxn-1024",
-    feature = "maxn-2048",
-    feature = "maxn-4096",
-))]
+#[cfg(feature = "size-128")]
 #[inline]
 #[must_use]
 pub fn rfft_256(input: &mut [f32; 256]) -> &mut [Complex32; 128] {
@@ -212,12 +161,7 @@ pub fn rfft_256(input: &mut [f32; 256]) -> &mut [Complex32; 128] {
 /// let mut input = [0.; 512];
 /// let result = rfft_512(&mut input);
 /// ```
-#[cfg(any(
-    feature = "maxn-512",
-    feature = "maxn-1024",
-    feature = "maxn-2048",
-    feature = "maxn-4096",
-))]
+#[cfg(feature = "size-256")]
 #[inline]
 #[must_use]
 pub fn rfft_512(input: &mut [f32; 512]) -> &mut [Complex32; 256] {
@@ -234,7 +178,7 @@ pub fn rfft_512(input: &mut [f32; 512]) -> &mut [Complex32; 256] {
 /// let mut input = [0.; 1024];
 /// let result = rfft_1024(&mut input);
 /// ```
-#[cfg(any(feature = "maxn-1024", feature = "maxn-2048", feature = "maxn-4096"))]
+#[cfg(feature = "size-512")]
 #[inline]
 #[must_use]
 pub fn rfft_1024(input: &mut [f32; 1024]) -> &mut [Complex32; 512] {
@@ -251,7 +195,7 @@ pub fn rfft_1024(input: &mut [f32; 1024]) -> &mut [Complex32; 512] {
 /// let mut input = [0.; 2048];
 /// let result = rfft_2048(&mut input);
 /// ```
-#[cfg(any(feature = "maxn-2048", feature = "maxn-4096"))]
+#[cfg(feature = "size-1024")]
 #[inline]
 #[must_use]
 pub fn rfft_2048(input: &mut [f32; 2048]) -> &mut [Complex32; 1024] {
@@ -268,7 +212,7 @@ pub fn rfft_2048(input: &mut [f32; 2048]) -> &mut [Complex32; 1024] {
 /// let mut input = [0.; 4096];
 /// let result = rfft_4096(&mut input);
 /// ```
-#[cfg(any(feature = "maxn-4096"))]
+#[cfg(feature = "size-2048")]
 #[inline]
 #[must_use]
 pub fn rfft_4096(input: &mut [f32; 4096]) -> &mut [Complex32; 2048] {

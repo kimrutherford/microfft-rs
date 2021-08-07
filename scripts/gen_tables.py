@@ -18,21 +18,35 @@ def parse_args():
     return parser.parse_args()
 
 
+def emit_header():
+    print("//! This file was generated with gen_tables.py.")
+    print()
+    print(f"#![allow(clippy::excessive_precision)]")
+    print(f"#![allow(clippy::unreadable_literal)]")
+    print()
+
+
 def emit_sine(max_n):
-    n = 4
-    while n <= max_n:
+    print("cfg_if::cfg_if! {")
+
+    n = max_n
+    while n > 2:
+        kw = "if" if n == max_n else "else if"
+        print(f'{kw} #[cfg(feature = "size-{n}")] {{')
         emit_sine_table(n)
-        n *= 2
+        print("}", end=" ")
+        n //= 2
+
+    print()
+    print("}")
+    print()
 
 
 def emit_sine_table(n):
-    print(f'#[cfg(feature = "maxn-{n}")]')
-    print(f"#[allow(clippy::excessive_precision)]")
-    print(f"#[allow(clippy::unreadable_literal)]")
     print("pub(crate) const SINE: &[f32] = &[")
     for k in range(1, n // 4):
         sine = math.sin(-2 * math.pi * k / n)
-        print(f"        {sine},")
+        print(f"    {sine},")
     print("];")
     print()
 
@@ -70,6 +84,8 @@ def reverse_bits(num, nbits):
 
 def main():
     args = parse_args()
+
+    emit_header()
     emit_sine(args.N)
     emit_bitrev(args.N)
 
