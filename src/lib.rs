@@ -32,8 +32,8 @@
 //! spectrum[0].im = 0.0;
 //!
 //! // the spectrum has a spike at index `signal_freq`
-//! let amplitudes: Vec<_> = spectrum.iter().map(|c| c.norm_sqr() as u32).collect();
-//! assert_eq!(&amplitudes, &[0, 0, 0, 64, 0, 0, 0, 0]);
+//! let amplitudes: Vec<_> = spectrum.iter().map(|c| c.norm() as u32).collect();
+//! assert_eq!(&amplitudes, &[0, 0, 0, 8, 0, 0, 0, 0]);
 //! ```
 //!
 //! [`complex`]: complex/index.html

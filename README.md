@@ -47,13 +47,31 @@ let spectrum = microfft::real::rfft_16(&mut samples);
 spectrum[0].im = 0.0;
 
 // the spectrum has a spike at index `signal_freq`
-let amplitudes: Vec<_> = spectrum.iter().map(|c| c.norm_sqr() as u32).collect();
-assert_eq!(&amplitudes, &[0, 0, 0, 64, 0, 0, 0, 0]);
+let amplitudes: Vec<_> = spectrum.iter().map(|c| c.norm() as u32).collect();
+assert_eq!(&amplitudes, &[0, 0, 0, 8, 0, 0, 0, 0]);
 ```
 
 ## Requirements
 
 Requires Rust version **1.51.0** or newer.
+
+## `no_std` Usage
+
+microfft has a `std` feature meant to make the library more useful for
+applications that can make use of the Rust standard library. For embedded
+applications this is usually not the case, so the `std` feature needs to be
+disabled.
+
+If you want to use microfft in a `no_std` application, specify the dependency
+in your `Cargo.toml` like this:
+
+```toml
+[dependencies.microfft]
+default-features = false
+features = ["maxn-4096"]
+```
+
+The meaning of the `maxn-4096` feature is explained in the next section.
 
 ## Sine Tables
 

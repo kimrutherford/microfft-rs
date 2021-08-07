@@ -32,7 +32,8 @@ default-features = false
 rustfft = "5"
 
 [features]
-default = ["maxn-4096"]
+default = ["std", "maxn-4096"]
+std = ["num-complex/std"]
 bitrev-tables = []
 maxn-4 = []
 maxn-8 = []
