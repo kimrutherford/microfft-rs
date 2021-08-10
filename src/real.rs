@@ -218,3 +218,37 @@ pub fn rfft_2048(input: &mut [f32; 2048]) -> &mut [Complex32; 1024] {
 pub fn rfft_4096(input: &mut [f32; 4096]) -> &mut [Complex32; 2048] {
     RFftN4096::transform(input).try_into().unwrap()
 }
+
+/// Perform an in-place 8192-point RFFT.
+///
+/// # Example
+///
+/// ```
+/// use microfft::real::rfft_8192;
+///
+/// let mut input = [0.; 8192];
+/// let result = rfft_8192(&mut input);
+/// ```
+#[cfg(feature = "size-4096")]
+#[inline]
+#[must_use]
+pub fn rfft_8192(input: &mut [f32; 8192]) -> &mut [Complex32; 4096] {
+    RFftN8192::transform(input).try_into().unwrap()
+}
+
+/// Perform an in-place 16384-point RFFT.
+///
+/// # Example
+///
+/// ```
+/// use microfft::real::rfft_16384;
+///
+/// let mut input = [0.; 16384];
+/// let result = rfft_16384(&mut input);
+/// ```
+#[cfg(feature = "size-8192")]
+#[inline]
+#[must_use]
+pub fn rfft_16384(input: &mut [f32; 16384]) -> &mut [Complex32; 8192] {
+    RFftN16384::transform(input).try_into().unwrap()
+}

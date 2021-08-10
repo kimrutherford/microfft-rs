@@ -36,7 +36,7 @@ rustfft = "6"
 # see https://github.com/rust-lang/cargo/issues/2911
 [dev-dependencies.microfft]
 path = "."
-features = ["std"]
+features = ["std", "size-16384"]
 
 [features]
 default = ["size-4096"]
@@ -53,6 +53,8 @@ size-512 = ["size-256"]
 size-1024 = ["size-512"]
 size-2048 = ["size-1024"]
 size-4096 = ["size-2048"]
+size-8192 = ["size-4096"]
+size-16384 = ["size-8192"]
 
 [badges]
 gitlab = { repository = "ra_kete/microfft-rs" }
