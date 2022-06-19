@@ -8,18 +8,8 @@ readme = "README.md"
 keywords = ["fft", "dft", "fourier"]
 categories = ["algorithms", "embedded", "no-std", "science"]
 license = "MIT"
-edition = "2018"
-
-# this requires Rust/Cargo 1.51 but it solves the following build problem:
-# this crates uses "num-complex" with no default features, i.e. no "std" feature
-# but it has "rustfft" as dev dependency which doesn't exclude the "num-complex"-
-# default-features, i.e. `cargo check --target thumbv7em-none-eabihf` fails even
-# tho it shouldn't - reason is that num-complex uses std - this comes from legacy
-# feature resolving in cargo!
-# Also see:
-# - https://github.com/rust-lang/cargo/issues/9199
-# - https://doc.rust-lang.org/nightly/cargo/reference/features.html#feature-resolver-version-2
-resolver = "2"
+edition = "2021"
+rust-version = "1.56"
 
 [dependencies]
 cfg-if = "1"
