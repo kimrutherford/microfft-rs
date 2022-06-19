@@ -2,10 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## 0.5.0 (unreleased)
+## 0.5.0 (2022-06-19)
 
 ### Changed
 
+- **Breaking:** The MSRV has been increased to 1.56.0.
 - **Breaking:** The former `maxn-*` features of this crate have been renamed
   to `size-*`. They still work basically the same way but are now additive,
   which means it is allowed that more than one of them is enabled at the same
