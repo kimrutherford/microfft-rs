@@ -49,8 +49,10 @@ pub mod real;
 
 pub use num_complex::Complex32;
 
-mod cfft;
-mod rfft;
+mod impls {
+    pub(crate) mod cfft;
+    pub(crate) mod rfft;
+}
 mod tables;
 
 use static_assertions::assert_cfg;

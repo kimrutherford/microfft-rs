@@ -1,6 +1,9 @@
-use crate::{cfft::*, tables, Complex32};
 use core::slice;
+
 use static_assertions::{assert_eq_align, assert_eq_size};
+
+use crate::impls::cfft::*;
+use crate::{tables, Complex32};
 
 pub(crate) trait RFft {
     type CFft: CFft;
