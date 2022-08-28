@@ -17,238 +17,42 @@ use core::convert::TryInto;
 
 use crate::{rfft::*, Complex32};
 
-/// Perform an in-place 2-point RFFT.
-///
-/// # Example
-///
-/// ```
-/// use microfft::real::rfft_2;
-///
-/// let mut input = [0.; 2];
-/// let result = rfft_2(&mut input);
-/// ```
-#[inline]
-#[must_use]
-pub fn rfft_2(input: &mut [f32; 2]) -> &mut [Complex32; 1] {
-    RFftN2::transform(input).try_into().unwrap()
+macro_rules! rfft_impls {
+    ( $( $N:expr => ($rfft_N:ident, $RFftN:ident $(, $feature:expr)?), )* ) => {
+        $(
+            #[doc = concat!("Perform an in-place ", stringify!($N), "-point RFFT.")]
+            #[doc = ""]
+            #[doc = "# Example"]
+            #[doc = ""]
+            #[doc = "```"]
+            #[doc = concat!("use microfft::real::", stringify!($rfft_N), ";")]
+            #[doc = ""]
+            #[doc = concat!("let mut input = [0.; ", stringify!($N), "];")]
+            #[doc = concat!("let result = ", stringify!($rfft_N), "(&mut input);")]
+            #[doc = "```"]
+            $( #[cfg(feature = $feature)] )?
+            #[inline]
+            #[must_use]
+            pub fn $rfft_N(input: &mut [f32; $N]) -> &mut [Complex32; $N / 2] {
+                $RFftN::transform(input).try_into().unwrap()
+            }
+        )*
+    };
 }
 
-/// Perform an in-place 4-point RFFT.
-///
-/// # Example
-///
-/// ```
-/// use microfft::real::rfft_4;
-///
-/// let mut input = [0.; 4];
-/// let result = rfft_4(&mut input);
-/// ```
-#[inline]
-#[must_use]
-pub fn rfft_4(input: &mut [f32; 4]) -> &mut [Complex32; 2] {
-    RFftN4::transform(input).try_into().unwrap()
-}
-
-/// Perform an in-place 8-point RFFT.
-///
-/// # Example
-///
-/// ```
-/// use microfft::real::rfft_8;
-///
-/// let mut input = [0.; 8];
-/// let result = rfft_8(&mut input);
-/// ```
-#[cfg(feature = "size-4")]
-#[inline]
-#[must_use]
-pub fn rfft_8(input: &mut [f32; 8]) -> &mut [Complex32; 4] {
-    RFftN8::transform(input).try_into().unwrap()
-}
-
-/// Perform an in-place 16-point RFFT.
-///
-/// # Example
-///
-/// ```
-/// use microfft::real::rfft_16;
-///
-/// let mut input = [0.; 16];
-/// let result = rfft_16(&mut input);
-/// ```
-#[cfg(feature = "size-8")]
-#[inline]
-#[must_use]
-pub fn rfft_16(input: &mut [f32; 16]) -> &mut [Complex32; 8] {
-    RFftN16::transform(input).try_into().unwrap()
-}
-
-/// Perform an in-place 32-point RFFT.
-///
-/// # Example
-///
-/// ```
-/// use microfft::real::rfft_32;
-///
-/// let mut input = [0.; 32];
-/// let result = rfft_32(&mut input);
-/// ```
-#[cfg(feature = "size-16")]
-#[inline]
-#[must_use]
-pub fn rfft_32(input: &mut [f32; 32]) -> &mut [Complex32; 16] {
-    RFftN32::transform(input).try_into().unwrap()
-}
-
-/// Perform an in-place 64-point RFFT.
-///
-/// # Example
-///
-/// ```
-/// use microfft::real::rfft_64;
-///
-/// let mut input = [0.; 64];
-/// let result = rfft_64(&mut input);
-/// ```
-#[cfg(feature = "size-32")]
-#[inline]
-#[must_use]
-pub fn rfft_64(input: &mut [f32; 64]) -> &mut [Complex32; 32] {
-    RFftN64::transform(input).try_into().unwrap()
-}
-
-/// Perform an in-place 128-point RFFT.
-///
-/// # Example
-///
-/// ```
-/// use microfft::real::rfft_128;
-///
-/// let mut input = [0.; 128];
-/// let result = rfft_128(&mut input);
-/// ```
-#[cfg(feature = "size-64")]
-#[inline]
-#[must_use]
-pub fn rfft_128(input: &mut [f32; 128]) -> &mut [Complex32; 64] {
-    RFftN128::transform(input).try_into().unwrap()
-}
-
-/// Perform an in-place 256-point RFFT.
-///
-/// # Example
-///
-/// ```
-/// use microfft::real::rfft_256;
-///
-/// let mut input = [0.; 256];
-/// let result = rfft_256(&mut input);
-/// ```
-#[cfg(feature = "size-128")]
-#[inline]
-#[must_use]
-pub fn rfft_256(input: &mut [f32; 256]) -> &mut [Complex32; 128] {
-    RFftN256::transform(input).try_into().unwrap()
-}
-
-/// Perform an in-place 512-point RFFT.
-///
-/// # Example
-///
-/// ```
-/// use microfft::real::rfft_512;
-///
-/// let mut input = [0.; 512];
-/// let result = rfft_512(&mut input);
-/// ```
-#[cfg(feature = "size-256")]
-#[inline]
-#[must_use]
-pub fn rfft_512(input: &mut [f32; 512]) -> &mut [Complex32; 256] {
-    RFftN512::transform(input).try_into().unwrap()
-}
-
-/// Perform an in-place 1024-point RFFT.
-///
-/// # Example
-///
-/// ```
-/// use microfft::real::rfft_1024;
-///
-/// let mut input = [0.; 1024];
-/// let result = rfft_1024(&mut input);
-/// ```
-#[cfg(feature = "size-512")]
-#[inline]
-#[must_use]
-pub fn rfft_1024(input: &mut [f32; 1024]) -> &mut [Complex32; 512] {
-    RFftN1024::transform(input).try_into().unwrap()
-}
-
-/// Perform an in-place 2048-point RFFT.
-///
-/// # Example
-///
-/// ```
-/// use microfft::real::rfft_2048;
-///
-/// let mut input = [0.; 2048];
-/// let result = rfft_2048(&mut input);
-/// ```
-#[cfg(feature = "size-1024")]
-#[inline]
-#[must_use]
-pub fn rfft_2048(input: &mut [f32; 2048]) -> &mut [Complex32; 1024] {
-    RFftN2048::transform(input).try_into().unwrap()
-}
-
-/// Perform an in-place 4096-point RFFT.
-///
-/// # Example
-///
-/// ```
-/// use microfft::real::rfft_4096;
-///
-/// let mut input = [0.; 4096];
-/// let result = rfft_4096(&mut input);
-/// ```
-#[cfg(feature = "size-2048")]
-#[inline]
-#[must_use]
-pub fn rfft_4096(input: &mut [f32; 4096]) -> &mut [Complex32; 2048] {
-    RFftN4096::transform(input).try_into().unwrap()
-}
-
-/// Perform an in-place 8192-point RFFT.
-///
-/// # Example
-///
-/// ```
-/// use microfft::real::rfft_8192;
-///
-/// let mut input = [0.; 8192];
-/// let result = rfft_8192(&mut input);
-/// ```
-#[cfg(feature = "size-4096")]
-#[inline]
-#[must_use]
-pub fn rfft_8192(input: &mut [f32; 8192]) -> &mut [Complex32; 4096] {
-    RFftN8192::transform(input).try_into().unwrap()
-}
-
-/// Perform an in-place 16384-point RFFT.
-///
-/// # Example
-///
-/// ```
-/// use microfft::real::rfft_16384;
-///
-/// let mut input = [0.; 16384];
-/// let result = rfft_16384(&mut input);
-/// ```
-#[cfg(feature = "size-8192")]
-#[inline]
-#[must_use]
-pub fn rfft_16384(input: &mut [f32; 16384]) -> &mut [Complex32; 8192] {
-    RFftN16384::transform(input).try_into().unwrap()
+rfft_impls! {
+    2 => (rfft_2, RFftN2),
+    4 => (rfft_4, RFftN4),
+    8 => (rfft_8, RFftN8, "size-4"),
+    16 => (rfft_16, RFftN16, "size-8"),
+    32 => (rfft_32, RFftN32, "size-16"),
+    64 => (rfft_64, RFftN64, "size-32"),
+    128 => (rfft_128, RFftN128, "size-64"),
+    256 => (rfft_256, RFftN256, "size-128"),
+    512 => (rfft_512, RFftN512, "size-256"),
+    1024 => (rfft_1024, RFftN1024, "size-512"),
+    2048 => (rfft_2048, RFftN2048, "size-1024"),
+    4096 => (rfft_4096, RFftN4096, "size-2048"),
+    8192 => (rfft_8192, RFftN8192, "size-4096"),
+    16384 => (rfft_16384, RFftN16384, "size-8192"),
 }
