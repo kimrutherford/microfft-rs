@@ -1,6 +1,7 @@
 //! FFT on complex inputs (CFFT)
 
-use crate::{cfft::*, Complex32};
+use crate::impls::cfft::*;
+use crate::Complex32;
 
 macro_rules! cfft_impls {
     ( $( $N:expr => ($cfft_N:ident, $CFftN:ident $(, $feature:expr)?), )* ) => {

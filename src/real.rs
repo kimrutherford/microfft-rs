@@ -15,7 +15,8 @@
 
 use core::convert::TryInto;
 
-use crate::{rfft::*, Complex32};
+use crate::impls::rfft::*;
+use crate::Complex32;
 
 macro_rules! rfft_impls {
     ( $( $N:expr => ($rfft_N:ident, $RFftN:ident $(, $feature:expr)?), )* ) => {
